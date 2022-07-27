@@ -501,6 +501,27 @@ static void fvmap_copy_from_sram(void __iomem *map_base, void __iomem *sram_base
 		}
 
 		for (j = 0; j < fvmap_header[i].num_of_lv; j++) {
+			if (strcmp(vclk->name, "dvfs_cpucl1") == 0) {
+				if (old->table[j].rate == 2886000)
+					old->table[j].rate = 3016000;
+				if (old->table[j].rate == 2860000)
+					old->table[j].rate = 2964000;
+			}
+			
+			if (strcmp(vclk->name, "dvfs_cpucl0") == 0) {
+				if (old->table[j].rate == 2002000)
+					old->table[j].rate = 2106000;
+				if (old->table[j].rate == 1950000)
+					old->table[j].rate = 2002000;
+			}
+			
+			if (strcmp(vclk->name, "dvfs_g3d") == 0) {
+				if (old->table[j].rate == 598000)
+					old->table[j].rate = 839000;
+				if (old->table[j].rate == 572000)
+					old->table[j].rate = 683000;
+			}
+
 			new->table[j].rate = old->table[j].rate;
 			new->table[j].volt = old->table[j].volt;
 			pr_info("  lv : [%7d], volt = %d uV (%d %%) \n",
