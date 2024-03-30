@@ -375,6 +375,7 @@ HOSTLDFLAGS  := $(HOST_LFS_LDFLAGS)
 HOST_LOADLIBES := $(HOST_LFS_LIBS)
 
 # Make variables (CC, etc...)
+<<<<<<< HEAD
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
 LDGOLD		= $(CROSS_COMPILE)ld.gold
@@ -393,6 +394,7 @@ DEPMOD		= /sbin/depmod
 PERL		= perl
 PYTHON		= python
 CHECK		= sparse
+=======
 AS				= $(CCACHE) $(CROSS_COMPILE)as
 LD				= $(CCACHE) $(CROSS_COMPILE)ld
 CC      		= $(CCACHE) $(srctree)/toolchain/clang_r416183b/bin/clang
@@ -409,6 +411,7 @@ DEPMOD			= /sbin/depmod
 PERL			= perl
 PYTHON			= python
 CHECK			= sparse
+>>>>>>> 091c8699357b (Makefile: use ccache)
 
 READELF        = $(CROSS_COMPILE)readelf
 export READELF
