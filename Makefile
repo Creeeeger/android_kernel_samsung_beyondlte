@@ -212,8 +212,6 @@ VPATH		:= $(srctree)$(if $(KBUILD_EXTMOD),:$(KBUILD_EXTMOD))
 
 export srctree objtree VPATH
 
-CCACHE := ccache
-
 # To make sure we do not include .config for any of the *config targets
 # catch them early, and hand them over to scripts/kconfig/Makefile
 # It is allowed to specify more targets when calling make, including
@@ -366,8 +364,8 @@ HOST_LFS_CFLAGS := $(shell getconf LFS_CFLAGS 2>/dev/null)
 HOST_LFS_LDFLAGS := $(shell getconf LFS_LDFLAGS 2>/dev/null)
 HOST_LFS_LIBS := $(shell getconf LFS_LIBS 2>/dev/null)
 
-HOSTCC       = $(CCACHE) gcc
-HOSTCXX      = $(CCACHE) g++
+HOSTCC       = gcc
+HOSTCXX      = g++
 HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 \
 		-fomit-frame-pointer -std=gnu89 $(HOST_LFS_CFLAGS)
 HOSTCXXFLAGS := -O2 $(HOST_LFS_CFLAGS)
@@ -375,7 +373,6 @@ HOSTLDFLAGS  := $(HOST_LFS_LDFLAGS)
 HOST_LOADLIBES := $(HOST_LFS_LIBS)
 
 # Make variables (CC, etc...)
-<<<<<<< HEAD
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
 LDGOLD		= $(CROSS_COMPILE)ld.gold
@@ -394,24 +391,6 @@ DEPMOD		= /sbin/depmod
 PERL		= perl
 PYTHON		= python
 CHECK		= sparse
-=======
-AS				= $(CCACHE) $(CROSS_COMPILE)as
-LD				= $(CCACHE) $(CROSS_COMPILE)ld
-CC      		= $(CCACHE) $(srctree)/toolchain/clang_r416183b/bin/clang
-CPP				= $(CCACHE) $(CC) -E
-AR				= $(CCACHE) $(CROSS_COMPILE)ar
-NM				= $(CCACHE) $(CROSS_COMPILE)nm
-STRIP			= $(CCACHE) $(CROSS_COMPILE)strip
-OBJCOPY			= $(CCACHE) $(CROSS_COMPILE)objcopy
-OBJDUMP			= $(CCACHE) $(CROSS_COMPILE)objdump
-AWK				= awk
-GENKSYMS		= scripts/genksyms/genksyms
-INSTALLKERNEL	:= installkernel
-DEPMOD			= /sbin/depmod
-PERL			= perl
-PYTHON			= python
-CHECK			= sparse
->>>>>>> 091c8699357b (Makefile: use ccache)
 
 READELF        = $(CROSS_COMPILE)readelf
 export READELF
