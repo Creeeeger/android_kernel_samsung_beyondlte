@@ -1377,6 +1377,7 @@ static __init int cpufreq_read_mif_min(char *mif_min)
 }
 __setup("mif_min=", cpufreq_read_mif_min);
 
+unsigned long arg_cpu_max_c1 = 2106000;
 
 static int __init cpufreq_read_cpu_max_c1(char *cpu_max_c1)
 {
