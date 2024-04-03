@@ -62,11 +62,11 @@ KERNEL_DEFCONFIG=exynos9820-beyondx_defconfig
 SOC=9820
 BOARD=SRPSC04B011KU
 '
-MODEL=beyond2lte
-export MODEL=beyond2lte
-KERNEL_DEFCONFIG=exynos9820-beyond2lte_defconfig
+MODEL=beyond0lte
+export MODEL=beyond0lte
+KERNEL_DEFCONFIG=exynos9820-beyond0lte_defconfig
 SOC=9820
-BOARD=SRPRI17C014KU
+BOARD=SRPRI28A014KU
 
 
 FUNC_BUILD_KERNEL()
