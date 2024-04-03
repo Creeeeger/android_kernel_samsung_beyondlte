@@ -389,34 +389,6 @@ static const struct attribute_group percent_margin_group = {
 	.attrs = percent_margin_attrs,
 };
 
-static void optimize_rate_volt_table(struct rate_volt_header *head, unsigned int num_of_lv) {
-    /* optimize voltages */
-    while (true) {
-        bool changed = false;
-        int i;
-
-        for (i = 1; i < num_of_lv; i++) {
-            /* switch voltages if previous frequency uses less */
-            if (head->table[i].volt > head->table[i-1].volt) {
-                unsigned int temp_volt = head->table[i-1].volt;
-
-                head->table[i-1].volt = head->table[i].volt;
-                head->table[i].volt = temp_volt;
-
-                changed = true;
-            /* set the voltage of frequency to 99.8% if matches with previous frequency */
-            } else if (head->table[i-1].volt == head->table[i].volt) {
-                head->table[i].volt = head->table[i].volt * 998 / 1000;
-
-                changed = true;
-            }
-        }
-
-        if (!changed)
-            break;
-    }
-}
-
 static void fvmap_copy_from_sram(void __iomem *map_base, void __iomem *sram_base)
 {
 	struct fvmap_header *fvmap_header, *header;
@@ -430,7 +402,7 @@ static void fvmap_copy_from_sram(void __iomem *map_base, void __iomem *sram_base
 	int size, margin;
 	int i, j, k;
 
-    fvmap_header = map_base;
+	fvmap_header = map_base;
 	header = sram_base;
 
 	size = cmucal_get_list_size(ACPM_VCLK_TYPE);
@@ -471,8 +443,6 @@ static void fvmap_copy_from_sram(void __iomem *map_base, void __iomem *sram_base
 		margin = init_margin_table[vclk->margin_id];
 		if (margin)
 			cal_dfs_set_volt_margin(i | ACPM_VCLK_TYPE, margin);
-		
-		optimize_rate_volt_table(old, fvmap_header[i].num_of_lv);
 
 		for (j = 0; j < fvmap_header[i].num_of_members; j++) {
 			clks = sram_base + fvmap_header[i].o_members;
