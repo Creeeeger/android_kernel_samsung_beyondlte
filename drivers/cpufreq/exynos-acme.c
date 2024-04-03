@@ -1369,41 +1369,6 @@ static int __init cpufreq_read_cpu_min_cl1(char *cpu_min_cl1)
 }
 __setup("cpu_min_cl1=", cpufreq_read_cpu_min_cl1);
 
-static unsigned long arg_cpu_max_cl0 = 2106000;
-
-static int __init cpufreq_read_cpu_max_cl0(char *cpu_max_cl0)
-{
-	unsigned long ui_khz;
-	int ret;
-
-	ret = kstrtoul(cpu_max_cl0, 0, &ui_khz);
-	if (ret)
-		return -EINVAL;
-
-	arg_cpu_max_cl0 = ui_khz;
-	printk("cpu_max_cl0=%lu\n", arg_cpu_max_cl0);
-	return ret;
-}
-__setup("cpu_max_cl0=", cpufreq_read_cpu_max_cl0);
-
-unsigned long arg_cpu_max_cl1 = 2400000;
-
-static int __init cpufreq_read_cpu_max_cl1(char *cpu_max_cl1)
-{
-	unsigned long ui_khz;
-	int ret;
-
-	ret = kstrtoul(cpu_max_cl1, 0, &ui_khz);
-	if (ret)
-		return -EINVAL;
-
-	arg_cpu_max_cl1 = ui_khz;
-	printk("cpu_max_cl1=%lu\n", arg_cpu_max_cl1);
-	return ret;
-}
-__setup("cpu_max_cl1=", cpufreq_read_cpu_max_cl1);
-
-unsigned long arg_cpu_max_cl2 = 2912000;
 
 static __init int init_domain(struct exynos_cpufreq_domain *domain,
 					struct device_node *dn)
@@ -1429,13 +1394,9 @@ static __init int init_domain(struct exynos_cpufreq_domain *domain,
 		domain->min_freq = max(domain->min_freq, val);
 
 	if (domain->id == 0) {
-		domain->max_freq = arg_cpu_max_cl0;
 		domain->min_freq = arg_cpu_min_cl0;
 	} else if (domain->id == 1) {
-		domain->max_freq = arg_cpu_max_cl1;
 		domain->min_freq = arg_cpu_min_cl1;
-	} else if (domain->id == 2) {
-		domain->max_freq = arg_cpu_max_cl2;
 	}
 
 	/* If this domain has boost freq, change max */
