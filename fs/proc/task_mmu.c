@@ -1271,6 +1271,7 @@ static ssize_t clear_refs_write(struct file *file, const char __user *buf,
 				 * without locked ops while the
 				 * coredump reads the vm_flags.
 				*/
+
 				if (!mmget_still_valid(mm)) {
 					/*
 					 * Silently return "count"
