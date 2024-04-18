@@ -1228,7 +1228,6 @@ static void ipv4_send_dest_unreach(struct sk_buff *skb)
 static void ipv4_link_failure(struct sk_buff *skb)
 {
 	struct ip_options opt;
-	struct rtable *rt;
 	int res;
 
 	ipv4_send_dest_unreach(skb);
