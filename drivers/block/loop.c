@@ -82,7 +82,7 @@
 
 static DEFINE_IDR(loop_index_idr);
 static DEFINE_MUTEX(loop_index_mutex);
-
+static DEFINE_MUTEX(loop_ctl_mutex);
 static int max_part = 7;
 static int part_shift;
 
